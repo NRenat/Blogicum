@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+User = get_user_model()
+
 
 class PublishedModel(models.Model):
     is_published = models.BooleanField(
@@ -45,9 +47,6 @@ class Location(PublishedModel):
         return self.name
 
 
-User = get_user_model()
-
-
 class Post(PublishedModel):
     title = models.CharField(max_length=256, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
@@ -90,9 +89,16 @@ class Post(PublishedModel):
 
 class Comment(models.Model):
     text = models.TextField('Текст комментария')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, )
-    created_at = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, )
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,
+                             verbose_name='Пост')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
+    author = models.ForeignKey(User, on_delete=models.CASCADE,
+                               verbose_name='Автор')
 
     class Meta:
         ordering = ('created_at',)
+        verbose_name = 'комментарий'
+        verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return self.text

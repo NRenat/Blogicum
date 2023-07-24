@@ -100,6 +100,8 @@ LOGIN_REDIRECT_URL = 'blog:index'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
+POSTS_PER_PAGE = 10
+
 CSRF_FAILURE_VIEW = 'pages.views.csrf_failure'
 
 STATICFILES_DIRS = [
