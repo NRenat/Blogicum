@@ -32,6 +32,7 @@ python manage.py runserver
 ```
 
 ## Технологии
+* Python 3.9
 * Django
 * django-bootstrap5
 * django-debug-toolbar
